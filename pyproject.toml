@@ -4,19 +4,23 @@ version = "0.1"
 description = "Solutions for Advent of Code 2023"
 readme = "README.md"
 requires-python = ">=3.10"
-authors = [{name = "Emanuel Ferm", email = "emanuel@eferm.com"}]
-dependencies = [
-  "requests>=2.31.0",
+authors = [
+  { name = "Emanuel Ferm", email = "emanuel@eferm.com" }
+]
+
+[project.optional-dependencies]
+dev = [
+  "python-dotenv",
+  "requests",
+  "ruff",
 ]
 
 [project.urls]
 Homepage = "https://github.com/eferm/aoc-2023"
 "Advent of Code Homepage" = "https://adventofcode.com/2023"
 
-[project.optional-dependencies]
-dev = [
-  "ruff",
-]
+[project.scripts]
+bootstrap = "utils:cli"
 
 [tool.ruff]
 line-length = 79
