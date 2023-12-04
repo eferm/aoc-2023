@@ -1,6 +1,7 @@
 import re
 
-lines = open("src/day01/input.txt").read().strip().split()
+with open("src/year2023/day01/input.txt") as f:
+    inp = f.read().strip().split()
 
 
 def parse1(line):
@@ -9,11 +10,10 @@ def parse1(line):
     return int(f"{first}{last}")
 
 
-parsed1 = list(map(parse1, lines))
+parsed1 = list(map(parse1, inp))
 print("part 1:", sum(parsed1))
 
 
-# lines = open("src/day01/example2.txt").read().strip().split()
 words = [
     "one",
     "two",
@@ -35,5 +35,5 @@ def parse2(line):
     return int(f"{to_digit.get(first, first)}{to_digit.get(last, last)}")
 
 
-parsed2 = list(map(parse2, lines))
+parsed2 = list(map(parse2, inp))
 print("part 2:", sum(parsed2))
