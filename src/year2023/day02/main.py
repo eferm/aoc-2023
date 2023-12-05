@@ -7,28 +7,28 @@ with open("src/year2023/day02/" + filename) as f:
     lines = f.read().strip().splitlines()
 
 
-def parse_cube(string):
+def parse_observation(string):
     """Transform '3 blue' -> {"blue": 3}"""
     t = string.split(" ")
     return {t[1]: int(t[0])}
 
 
-def parse_set(string):
+def parse_game_round(string):
     """Transform '3 blue, 4 red' -> {"blue": 3, "red": 4}"""
-    dicts = map(parse_cube, string.split(", "))
-    return dict(i for d in dicts for i in d.items())
+    dicts = map(parse_observation, string.split(", "))
+    return dict(t for d in dicts for t in d.items())  # flatten
 
 
 def parse_game(line):
     string = re.match(r"^Game \d+: (.*)", line).group(1)
 
     # -> [{"blue": 3, "red": 4}, {"blue": 2}]
-    sets = map(parse_set, string.split("; "))
+    game_rounds = map(parse_game_round, string.split("; "))
 
     # -> {"blue": [3, 2], "red": [4]}
     summary = defaultdict(list)
-    for s in sets:
-        for k, v in s.items():
+    for game_round in game_rounds:
+        for k, v in game_round.items():
             summary[k].append(v)
 
     return summary
