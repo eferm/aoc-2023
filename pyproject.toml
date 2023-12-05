@@ -9,9 +9,11 @@ authors = [
 ]
 
 [project.optional-dependencies]
-dev = [
+cli = [
   "python-dotenv",
   "requests",
+]
+dev = [
   "ruff",
 ]
 
@@ -20,7 +22,14 @@ Homepage = "https://github.com/eferm/aoc-2023"
 "Advent of Code Homepage" = "https://adventofcode.com/2023"
 
 [project.scripts]
-bootstrap = "utils:cli"
+bootstrap = "cli:bootstrap"
 
 [tool.ruff]
 line-length = 79
+
+[tool.ruff.lint]
+ignore = [
+  "E741",  # ambiguous variable name
+  "F403",
+  "F405",
+]
