@@ -1,39 +1,29 @@
 import re
 
 with open("src/year2023/day01/input.txt") as f:
-    inp = f.read().strip().split()
+    lines = f.read().strip().splitlines()
 
 
 def parse1(line):
-    first = re.match(r"^.*?(\d)", line).group(1)
-    last = re.match(r".*(\d).*$", line).groups()[-1]
-    return int(f"{first}{last}")
+    digits = re.findall(r"\d", line)
+    return int(digits[0] + digits[-1])
 
 
-parsed1 = list(map(parse1, inp))
-print("part 1:", sum(parsed1))
-
-
-words = [
-    "one",
-    "two",
-    "three",
-    "four",
-    "five",
-    "six",
-    "seven",
-    "eight",
-    "nine",
-]
+parsed1 = list(map(parse1, lines))
+print("Part 1:", sum(parsed1))
 
 
 def parse2(line):
-    first = re.match(rf"^.*?(\d|{'|'.join(words)})", line).group(1)
-    last = re.match(rf".*(\d|{'|'.join(words)}).*$", line).groups()[-1]
+    words = "one,two,three,four,five,six,seven,eight,nine".split(",")
 
-    to_digit = dict(zip(words, range(1, 10)))
-    return int(f"{to_digit.get(first, first)}{to_digit.get(last, last)}")
+    # positive lookahead to find `two` in `178ncllbfkkh4eightwoq`
+    digits = re.findall(rf"(?=(\d|{'|'.join(words)}))", line)
+
+    def to_digit(string):
+        word_to_digit = dict(zip(words, range(1, 10)))
+        return word_to_digit.get(string, string)  # default to digit
+
+    return int(f"{to_digit(digits[0])}{to_digit(digits[-1])}")
 
 
-parsed2 = list(map(parse2, inp))
-print("part 2:", sum(parsed2))
+print("Part 2:", sum(map(parse2, lines)))
