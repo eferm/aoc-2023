@@ -28,8 +28,4 @@ bootstrap = "cli:bootstrap"
 line-length = 79
 
 [tool.ruff.lint]
-ignore = [
-  "E741",  # ambiguous variable name
-  "F403",
-  "F405",
-]
+ignore = []

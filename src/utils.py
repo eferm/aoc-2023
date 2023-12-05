@@ -1,6 +1,6 @@
-def lprint(l):
-    """Pretty print a a list"""
-    for row in l:
+def lprint(lst):
+    """Pretty print a list."""
+    for row in lst:
         print(row)
 
 

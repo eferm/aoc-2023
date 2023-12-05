@@ -12,13 +12,8 @@ SESSION = os.getenv("SESSION")
 
 TEMPLATE = """from utils import *
 
-filename = "input.txt"
-# filename = "example1.txt"
-# filename = "example2.txt"
-with open("{folder}/" + filename) as f:
+with open("{folder}/input.txt") as f:
     lines = f.read().strip().splitlines()
-
-lprint(lines)
 """
 
 
