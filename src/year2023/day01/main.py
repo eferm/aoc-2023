@@ -1,7 +1,7 @@
 import re
 
 with open("src/year2023/day01/input.txt") as f:
-    lines = f.read().strip().splitlines()
+    lines = f.read().splitlines()
 
 
 def parse1(line):

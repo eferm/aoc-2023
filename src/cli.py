@@ -13,7 +13,9 @@ SESSION = os.getenv("SESSION")
 TEMPLATE = """from utils import *
 
 with open("{folder}/input.txt") as f:
-    lines = f.read().strip().splitlines()
+    lines = f.read().splitlines()
+
+lprint(lines[:10])
 """
 
 

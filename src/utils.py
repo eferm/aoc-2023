@@ -1,7 +1,14 @@
-def lprint(lst):
-    """Pretty print a list."""
-    for row in lst:
-        print(row)
+def lprint(seq):
+    """Pretty print an iterable."""
+    for val in seq:
+        print(val)
+
+
+def mprint(seqseq):
+    """Pretty print an iterable of iterables."""
+    for seq in seqseq:
+        for val in seq:
+            print(val)
 
 
 def lmap(f, *seqs):

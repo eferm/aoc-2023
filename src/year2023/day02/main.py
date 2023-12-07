@@ -2,9 +2,8 @@ import re
 from collections import defaultdict
 from functools import reduce
 
-filename = "input.txt"
-with open("src/year2023/day02/" + filename) as f:
-    lines = f.read().strip().splitlines()
+with open("src/year2023/day02/input.txt") as f:
+    lines = f.read().splitlines()
 
 
 def parse_observation(string):

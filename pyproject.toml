@@ -28,4 +28,6 @@ bootstrap = "cli:bootstrap"
 line-length = 79
 
 [tool.ruff.lint]
-ignore = []
+ignore = [
+  "E741",  # Ambiguous variable name: `l`
+]

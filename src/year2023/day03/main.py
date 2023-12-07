@@ -5,12 +5,8 @@ from functools import reduce
 with open("src/year2023/day03/input.txt") as f:
     inp = f.read().strip()
 
-print(inp)
-
 WIDTH = len(inp.splitlines()[0]) + 1  # incl newline
 HEIGHT = len(inp.splitlines())
-
-print(WIDTH, "width", "x", HEIGHT, "height")
 
 
 def indexes(pattern, string):
@@ -46,7 +42,7 @@ def valid1(inp):
 print("Part 1:", sum(valid1(inp)))
 
 
-def adj_positions(start, end, inp):
+def adj_positions2(start, end, inp):
     row = start // WIDTH
     u = trim(row - 1, start - WIDTH - 1, end - WIDTH + 1)
     d = trim(row + 1, start + WIDTH - 1, end + WIDTH + 1)
@@ -59,10 +55,9 @@ def adj_positions(start, end, inp):
 def valid2(inp):
     gears = defaultdict(list)
     for start, end in indexes(r"\d+", inp):
-        for i, _, symbols in adj_positions(start, end, inp):
-            if "*" in symbols:
-                for j, _ in indexes(r"[*]", symbols):
-                    gears[i + j].append(int(inp[start : end + 1]))
+        for i, _, symbols in adj_positions2(start, end, inp):
+            for j, _ in indexes(r"[*]", symbols):
+                gears[i + j].append(int(inp[start : end + 1]))
     for k, v in gears.items():
         if len(v) > 1:
             yield reduce(lambda x, y: x * y, v, 1)
