@@ -1,16 +1,12 @@
 import itertools
 
-from utils import *
-
 with open("src/year2023/day11/input.txt") as f:
     image = f.read().splitlines()
-
-# lprint(image)
 
 
 ROWS = len(image)
 COLS = len(image[0])
-print(f"{ROWS}x{COLS}")
+# print(f"{ROWS}x{COLS}")
 
 
 def empty(seq):
@@ -48,10 +44,28 @@ def distance(a, b):
 def distances(galaxies):
     for a, b in itertools.combinations(range(len(galaxies)), 2):
         ga, gb = galaxies[a], galaxies[b]
-        # print(a + 1, "->", b + 1, end=": ")
         yield distance(ga, gb)
+
+
+def get_galaxies2(mat, distance=1_000_000):
+    rempty = 0
+    for r, row in enumerate(mat):
+        if empty(row):
+            rempty += 1
+        cempty = 0
+        for c, val in enumerate(row):
+            if empty(column(mat, c)):
+                cempty += 1
+            if val == "#":
+                yield (
+                    (r - rempty) + rempty * distance,
+                    (c - cempty) + cempty * distance,
+                )
 
 
 expanded = transposed(expanded(transposed(expanded(image))))
 galaxies = dict(enumerate(get_galaxies(expanded)))
-print("Part 1", sum(distances(galaxies)))
+print("Part 1:", sum(distances(galaxies)))
+
+galaxies = dict(enumerate(get_galaxies2(image)))
+print("Part 2:", sum(distances(galaxies)))
